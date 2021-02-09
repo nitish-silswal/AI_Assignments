@@ -1,4 +1,4 @@
-# Code for NQUEENS as optimized implementation of Genetic Algorithm -> NOT COMPLETE
+# Code for NQUEENS as optimized implementation of Genetic Algorithm 
 
 import random
 import time
