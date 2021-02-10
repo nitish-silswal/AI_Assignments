@@ -62,16 +62,6 @@ def get_fitness(individual):
 	return 1/distance
 
 
-def count_distinct_elements(population):
-	S = set()
-	for individual in population:
-		s = ""
-		for el in individual:
-			s += el
-		S.add(s)
-	return len(S)
-
-
 def get_best_fitness(population):
 	res = -1
 	individual = None
