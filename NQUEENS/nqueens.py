@@ -84,5 +84,5 @@ if __name__ == "__main__":
     print()
     print("============+=================+==============+==============+===============+")
     print("Fittest individual : " + '"' + fittest_individual + '"')
-    print("Genrations produced : " + str(generation_number))
+    print("Generations produced : " + str(generation_number))
     print("============+=================+==============+==============+===============+") 
