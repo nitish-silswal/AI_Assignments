@@ -52,16 +52,11 @@ def fill_grid(N):
 
 
 def is_safe(row,column,g):
-    temp = (7*100+(10*row)+column) + 10*10;
-    temp -= 100;
+    temp = (7*100+(10*row)+column) + 10*10;temp -= 100;
     lst = list()
     lst.append(temp)
     return (not g.solve(assumptions = lst))
 
-###############################################################################################################
-
-def sortfunc(val):
-    return (8-val[0]-val[1] + 100  - 10*10);
 
 ###############################################################################################################
 def findallsafe(grid, safe, g):
@@ -81,7 +76,7 @@ class Node:
   
     def __eq__(self, other):
         if(self.pos != other.pos) : return False
-        return True
+        return (True)
 
     def generatesuccessors(self , source , g):
         possible_direction = [[0,1],[0,-1],[-1,0],[1,0]]
@@ -108,6 +103,7 @@ def findleastf(openlist, current):
     for elem in openlist:
         if abs(comp  - (elem.pos[0] + elem.pos[1])) < min_val :
             min_el = elem
+            min_val = abs(comp  - (elem.pos[0] + elem.pos[1]))
         else:
             elem =  None
     return min_el
@@ -204,12 +200,17 @@ def astar(current, goal, allowed, g):
         closedlist.append(q)
 
     return None
+
+
+def print_path(finalpath):
+    for i in range(len(finalpath)-1):
+        print(finalpath[i] , end = " => ")
+    print(finalpath[len(finalpath)-1])
+
+
 ###############################################################################################################
 
-    
-
-
-if __name__=='__main__':
+if __name__== '__main__':
 
     g = Glucose3()
     ag = Agent()
@@ -218,7 +219,7 @@ if __name__=='__main__':
         g.add_clause(el)
 
     grid = fill_grid(4)
-
+    found_path = False
     #####################################
     finalpath = list();
     safe = list();
@@ -230,7 +231,7 @@ if __name__=='__main__':
         
         if(x == 4 and y == 4):
             finalpath.append([4,4])
-            print(finalpath)
+            found_path = True
             break
         # If percept return =0, then the cells adjacent have to be clear. So current cell is safe: add 6xy to KB
         extra_info = -1
@@ -285,4 +286,9 @@ if __name__=='__main__':
                 ag.TakeAction('Up')
             elif dx == 0 and dy == -1 :
                 ag.TakeAction('Down')
-           
+    
+    if found_path :
+        print_path(finalpath)
+
+    else:
+        print("Can't reach the final location [4,4] ... because NO RISKS taken")
